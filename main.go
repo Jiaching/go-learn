@@ -1,6 +1,16 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
+
+// 提供輸入玩家兩個故事樣板可以選擇
+// 每一個故事樣板都會有五個詞彙提供玩家去選擇
+// 每一個詞彙都有3個簡單的提示，玩家只需要輸入數字，可以選擇提示的詞彙，也可以選擇4. 提供更多詞彙(3個)
+// 需要判斷玩家是否輸入為數字或是非數字/非小數點的字串
+
+// 提示範例： 請輸入XX(名詞) 或是輸入數字，使用提示的詞彙(1. 2. 3. 4.更多提示)
 
 func main() {
 	var characterJob string
@@ -8,6 +18,10 @@ func main() {
 	var characterGoal string
 	var characterSituationAdverb string
 	var characterVerb string
+
+	fmt.Println(GetUserInputWithPromptHints("test %sb", []string{"aaa", "bbb"}))
+
+	return
 
 	fmt.Println("歡迎來到故事模板，接下來會請你輸入不同的詞彙，來透過模板創建一個故事")
 	// 隨機輸入名詞/動詞/形容詞
@@ -32,4 +46,23 @@ func main() {
 func Prompt(prompt string, input *string) {
 	fmt.Println(prompt)
 	fmt.Scan(input)
+}
+
+// 提示範例： 請輸入XX(名詞) 或是輸入數字，使用提示的詞彙(1.aaa 2.bbbb 3.ccc 4.dddd更多提示)
+// 回傳玩家輸入的詞彙
+func GetUserInputWithPromptHints(prompt string, hints []string) string {
+	var userInput string
+	var builder strings.Builder
+
+	for i, hint := range hints {
+		var number = i + 1
+		builder.WriteString(fmt.Sprintf("%d. %s\n", number, hint))
+	}
+
+	fmt.Println(builder.String())
+	return ""
+
+	var promptWithHints string = fmt.Sprintf(prompt, hints)
+	Prompt(promptWithHints, &userInput)
+	return userInput
 }
