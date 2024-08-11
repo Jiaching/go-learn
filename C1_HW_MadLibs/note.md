@@ -1,0 +1,22 @@
+### Notes
+- 發現go lang 的slice切片是屬於value type，跟我在學習C# 有差異，因此如果slice 太大的話，需要考慮傳記憶體位置，減少Stack 記憶體複製太大的slice內容
+- 使用切片的`hints` 其實可以傳遞記憶體的位置，就不用複製整個切片內的數值
+- 透過`strings.builder` 來將提示詞組成字串，讓使用者可以依照選項(數字)選擇提示詞
+- 以 `for` 作為無限迴圈，等待使用者輸入正確的選項 (不是空字串 或是 在選項內的提示詞)則`break`
+- 用`strconv.Atoi`  來將字串轉成數字，用以判斷使用者的輸入內容是自行輸入的字串或是數字選項(提示詞)
+- 發現go 沒有像C#: 字串插值 (String interpolation) 的格式化作法，需要透過Sprintf 去做
+
+    ```csharp
+    var message = $"哈囉 {userName}"; //C#
+    fmt.Sprintf("哈囉 %s ", userName)) // go lang
+    ```
+
+  但有可能變數太多？超過4個以上，會不會增加閱讀上以及維護上困難？需要一個一個對數值
+
+- 有學到`Sscanf` ，可以用來Parse 固定格式中，指定位置的數值
+
+  可以減少用特定的分隔符號(，_)等等去拆解出想要的數值，會方便很多
+
+    ```csharp
+    Sscanf("Kim is 22 years old", "%s is %d years old", &name, &age)
+    ```
