@@ -49,7 +49,7 @@ func Prompt(prompt string, input *string) {
 	fmt.Scan(input)
 }
 
-// 提示範例： 請輸入XX(名詞) 或是輸入數字，使用提示的詞彙(1.aaa 2.bbbb 3.ccc 4.dddd更多提示)
+// 提示範例： 請輸入XX(名詞) 或是輸入數字，使用提示的詞彙(1.aaa 2.bbbb 3.ccc)
 // 回傳玩家輸入的詞彙
 func GetUserInputWithPromptHints(prompt string, hints []string) string {
 	var userInput string
@@ -73,12 +73,6 @@ func GetUserInputWithPromptHints(prompt string, hints []string) string {
 
 		// 表示玩家自行輸入字串
 		if err != nil {
-			break
-		}
-
-		// 表示玩家採用提示詞
-		if hintIndex == len(hints)-1 {
-			// Ask more hints
 			break
 		}
 
