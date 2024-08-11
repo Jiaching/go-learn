@@ -41,7 +41,7 @@ func main() {
 
 func Prompt(prompt string, input *string) {
 	fmt.Println(prompt)
-	fmt.Scan(input)
+	fmt.Scanln(input)
 }
 
 // 提示範例： 請輸入XX(名詞) 或是輸入數字，使用提示的詞彙(1.aaa 2.bbbb 3.ccc)
