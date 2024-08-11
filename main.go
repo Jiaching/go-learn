@@ -65,23 +65,29 @@ func PromptHints(prompt string, hints []string, userInput *string) {
 	for {
 		Prompt(promptWithHints, userInput)
 		number, err := strconv.Atoi(*userInput)
-		
+
 		// 表示玩家自行輸入字串
 		if err != nil {
+			*userInput = strings.TrimSpace(*userInput)
+			if *userInput == EmptyString {
+				fmt.Println("輸入字串為空，請重新輸入")
+				continue
+			}
 			break
 		}
 
 		var hintIndex = number - 1
-		if hintIndex < 0 {
+		if hintIndex < 0 || hintIndex >= len(hints) {
 			fmt.Println("輸入數字錯誤，請重新輸入")
 			continue
 		}
 
+		// 取的陣列內提示的詞
 		if hintIndex < len(hints) {
 			*userInput = hints[hintIndex]
 			break
 		}
 
-		fmt.Println("輸入數字錯誤，請重新輸入")
+		break
 	}
 }
