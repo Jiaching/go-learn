@@ -35,7 +35,7 @@ func main() {
 	fmt.Println("\n這是屬於您的故事")
 	story := fmt.Sprintf("從前有一位%s，個性非常的%s\n"+
 		"由於想要成為一位%s，因此開始踏上冒險的旅途\n"+
-		"%s，今日%s怪物史萊姆，成為初心者未來的夥伴，繼續冒險", characterJob, characterPersonalAdjective, characterGoal, characterSituationAdverb, characterVerb)
+		"%s，今日%s怪物史萊姆，成為%s未來的夥伴，繼續冒險", characterJob, characterPersonalAdjective, characterGoal, characterSituationAdverb, characterVerb, characterJob)
 	fmt.Println(story)
 }
 
