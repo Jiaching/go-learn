@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strconv"
 	"strings"
 )
 
@@ -19,7 +20,7 @@ func main() {
 	var characterSituationAdverb string
 	var characterVerb string
 
-	fmt.Println(GetUserInputWithPromptHints("test %sb", []string{"aaa", "bbb"}))
+	fmt.Println(GetUserInputWithPromptHints("test %s", []string{"aaa", "bbb"}))
 
 	return
 
@@ -52,17 +53,43 @@ func Prompt(prompt string, input *string) {
 // 回傳玩家輸入的詞彙
 func GetUserInputWithPromptHints(prompt string, hints []string) string {
 	var userInput string
-	var builder strings.Builder
+	var hintsBuilder strings.Builder
 
+	// 組合提示詞
 	for i, hint := range hints {
 		var number = i + 1
-		builder.WriteString(fmt.Sprintf("%d. %s\n", number, hint))
+		hintsBuilder.WriteString(fmt.Sprintf("%d. %s ", number, hint))
 	}
 
-	fmt.Println(builder.String())
-	return ""
+	var promptWithHints = fmt.Sprintf(prompt, hintsBuilder.String())
+	for {
+		Prompt(promptWithHints, &userInput)
+		number, err := strconv.Atoi(userInput)
+		var hintIndex = number - 1
+		if hintIndex < 0 {
+			fmt.Println("輸入數字錯誤，請重新輸入")
+			continue
+		}
 
-	var promptWithHints string = fmt.Sprintf(prompt, hints)
+		// 表示玩家自行輸入字串
+		if err != nil {
+			break
+		}
+
+		// 表示玩家採用提示詞
+		if hintIndex == len(hints)-1 {
+			// Ask more hints
+			break
+		}
+
+		if hintIndex < len(hints) {
+			userInput = hints[hintIndex]
+			break
+		}
+	}
+
+	return userInput
+
 	Prompt(promptWithHints, &userInput)
 	return userInput
 }
