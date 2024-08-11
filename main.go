@@ -63,27 +63,25 @@ func GetUserInputWithPromptHints(prompt string, hints []string) string {
 
 	var promptWithHints = fmt.Sprintf(prompt, hintsBuilder.String())
 	for {
-		Prompt(promptWithHints, &userInput)
-		number, err := strconv.Atoi(userInput)
+		Prompt(promptWithHints, userInput)
+		number, err := strconv.Atoi(*userInput)
+		
+		// 表示玩家自行輸入字串
+		if err != nil {
+			break
+		}
+
 		var hintIndex = number - 1
 		if hintIndex < 0 {
 			fmt.Println("輸入數字錯誤，請重新輸入")
 			continue
 		}
 
-		// 表示玩家自行輸入字串
-		if err != nil {
-			break
-		}
-
 		if hintIndex < len(hints) {
-			userInput = hints[hintIndex]
+			*userInput = hints[hintIndex]
 			break
 		}
+
+		fmt.Println("輸入數字錯誤，請重新輸入")
 	}
-
-	return userInput
-
-	Prompt(promptWithHints, &userInput)
-	return userInput
 }
