@@ -37,3 +37,24 @@ func calculateFibonacci(num int) []int {
 
 	return numOfFibonacci
 }
+// 第二種寫法，將slice 傳遞參考到func
+func secondMainToFibonacci() {
+	var num int
+	var numOfFibonacci = []int{1, 1}
+
+	fmt.Println("請輸入要計算費式數列的數字")
+	fmt.Scanln(&num)
+
+	secondCalculateFibonacci(num, &numOfFibonacci)
+	if numOfFibonacci == nil {
+		fmt.Println("請輸入大於1的數字")
+		return
+	}
+
+	fmt.Println(numOfFibonacci)
+}
+
+func secondCalculateFibonacci(num int, numOfFibonacci *[]int) {
+	if num < 2 {
+		numOfFibonacci = nil
+		return
