@@ -58,3 +58,8 @@ func secondCalculateFibonacci(num int, numOfFibonacci *[]int) {
 	if num < 2 {
 		numOfFibonacci = nil
 		return
+	}
+	for index := len(*numOfFibonacci); index < num; index++ {
+		*numOfFibonacci = append(*numOfFibonacci, (*numOfFibonacci)[index-2]+(*numOfFibonacci)[index-1])
+	}
+}
