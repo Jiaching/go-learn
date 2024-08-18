@@ -5,10 +5,17 @@ import (
 )
 
 func main() {
-	romanToInt("CIV")
+	//fmt.Println(IsCorrect(romanToInt("CIV"), 104))
+	//fmt.Println(IsCorrect(romanToInt("LVIII"), 58))
+	fmt.Println(IsCorrect(romanToInt("MCMXCIV"), 1994))
+	//fmt.Println(IsCorrect(romanToInt("MCM"), 1900))
 }
 
-func romanToInt(romanInput string) {
+func IsCorrect(value int, expect int) bool {
+	return value == expect
+}
+
+func romanToInt(romanInput string) int {
 	romanNumberMap := make(map[string]int)
 	romanNumberMap["M"] = 1000
 	romanNumberMap["D"] = 500
@@ -19,7 +26,7 @@ func romanToInt(romanInput string) {
 	romanNumberMap["I"] = 1
 
 	romanNumberReplaceMap := make(map[string]int)
-	romanNumberReplaceMap["CM"] = 9000
+	romanNumberReplaceMap["CM"] = 900
 	romanNumberReplaceMap["CD"] = 400
 	romanNumberReplaceMap["XC"] = 90
 	romanNumberReplaceMap["XL"] = 40
@@ -36,7 +43,7 @@ func romanToInt(romanInput string) {
 	charNumber, exists := romanNumberMap[lastRomanInput]
 	if !exists {
 		fmt.Println("請重新輸入，字元不符合")
-		return
+		return 0
 	}
 
 	nums := make([]int, 0)
@@ -59,10 +66,11 @@ func romanToInt(romanInput string) {
 		currentRomanNumber, exists := romanNumberMap[currentRomanInput]
 		if !exists {
 			fmt.Println("請重新輸入，字元不符合")
-			return
+			return 0
 		}
 
 		nums = append(nums, currentRomanNumber)
+		lastRomanInput = currentRomanInput
 		fmt.Println(nums)
 	}
 
@@ -71,4 +79,5 @@ func romanToInt(romanInput string) {
 		sum += value
 	}
 	fmt.Println(sum)
+	return sum
 }
