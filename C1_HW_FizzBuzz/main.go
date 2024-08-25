@@ -1,22 +1,28 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strconv"
+)
 
 func main() {
-	FizzBuzz()
+	array := FizzBuzz(100)
+	fmt.Println(array)
 }
 
-func FizzBuzz() {
-	for i := 1; i <= 100; i++ {
+func FizzBuzz(num int) []string {
+	var fizzBuzz []string
+	for i := 1; i <= num; i++ {
 		switch {
 		case i%15 == 0:
-			fmt.Println("Fizz Buzz")
+			fizzBuzz = append(fizzBuzz, "FizzBuzz")
 		case i%5 == 0:
-			fmt.Println("Buzz")
+			fizzBuzz = append(fizzBuzz, "Buzz")
 		case i%3 == 0:
-			fmt.Println("Fizz")
+			fizzBuzz = append(fizzBuzz, "Fizz")
 		default:
-			fmt.Println(i)
+			fizzBuzz = append(fizzBuzz, strconv.Itoa(i))
 		}
 	}
+	return fizzBuzz
 }
